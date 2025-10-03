@@ -2,23 +2,28 @@
 
 import React from 'react';
 
-import MainNavbar from '@/components/MainNavbar'; 
+import MainNavbar from '@/components/MainNavbar';
+// 1. استيراد الـ Hooks المطلوبة
+import { useCartState } from '@/hooks/useCartState'; 
+import { useWishlistState } from '@/hooks/useWishlistState'; 
 
 const CheckoutPage: React.FC = () => {
+    // 2. استخدام الـ Hooks للحصول على الأعداد
+    const { cartCount } = useCartState();
+    const { wishlistCount } = useWishlistState();
     
     
     const handlePayNow = () => {
-       
- 
         
+        // في تطبيق حقيقي، سيتم معالجة الدفع هنا
         alert("Preparing payment... (In a real app, a secure Stripe Checkout link would open here.)");
-      
     };
 
     return (
         <div className="min-h-screen flex flex-col"> 
             
-            <MainNavbar /> 
+            {/* 3. تمرير الخصائص المطلوبة لـ MainNavbar */}
+            <MainNavbar cartCount={cartCount} wishlistCount={wishlistCount} />
 
             <div 
                 className="flex-grow flex items-center justify-center p-4" 
@@ -29,7 +34,7 @@ const CheckoutPage: React.FC = () => {
                         Checkout Details
                     </h1>
                     
-                    {}
+                    {/* ... حقول النموذج ... */}
                     <div className="mb-6">
                         <label htmlFor="details" className="block text-gray-700 font-semibold mb-2">Details (e.g., Full Address)</label>
                         <input
@@ -40,7 +45,7 @@ const CheckoutPage: React.FC = () => {
                         />
                     </div>
 
-                    {}
+                    
                     <div className="mb-6">
                         <label htmlFor="phone" className="block text-gray-700 font-semibold mb-2">Phone</label>
                         <input
@@ -51,7 +56,7 @@ const CheckoutPage: React.FC = () => {
                         />
                     </div>
 
-                    {}
+                    
                     <div className="mb-8">
                         <label htmlFor="city" className="block text-gray-700 font-semibold mb-2">City</label>
                         <input
@@ -62,7 +67,7 @@ const CheckoutPage: React.FC = () => {
                         />
                     </div>
 
-                    {}
+                    
                     <button
                         onClick={handlePayNow}
                         className="w-full py-3 rounded-lg text-white font-bold transition duration-300 shadow-md"
