@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 
 import { Product } from './useCartState'; 
 
@@ -21,14 +21,14 @@ export const useWishlistState = () => {
         }
     }, []);
 
-   
+    
     const isInWishlist = useCallback((productId: number): boolean => {
         return wishlist.some(item => item.id === productId);
     }, [wishlist]);
 
 
     const addToWishlist = (product: Product) => {
-     
+        
         if (!isInWishlist(product.id)) {
             const updatedWishlist = [...wishlist, product];
             setWishlist(updatedWishlist);
@@ -46,9 +46,15 @@ export const useWishlistState = () => {
         }
     };
 
-   
+    
+    const wishlistCount = useMemo(() => {
+        return wishlist.length;
+    }, [wishlist]);
+
+    
     return {
         wishlist,
+        wishlistCount, 
         addToWishlist,
         removeFromWishlist,
         isInWishlist, 

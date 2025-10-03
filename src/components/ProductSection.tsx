@@ -39,116 +39,116 @@ const categories = [
 ];
 
 interface ProductSectionProps {
-    title: string;
-    showCategories?: boolean; 
+    title: string;
+    showCategories?: boolean; 
 }
 
 const ProductSection: React.FC<ProductSectionProps> = ({ title, showCategories = true }) => { 
-    const [searchTerm, setSearchTerm] = useState('');
-    
-    const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
+    const [searchTerm, setSearchTerm] = useState('');
+    
+    const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
 
-    useEffect(() => {
-        if (!searchTerm) {
-            setFilteredProducts(products);
-            return;
-        }
+    useEffect(() => {
+        if (!searchTerm) {
+            setFilteredProducts(products);
+            return;
+        }
 
-        const results = products.filter(product =>
-            product.name.toLowerCase().includes(searchTerm.toLowerCase())
-        );
-        setFilteredProducts(results);
-    }, [searchTerm]);
+        const results = products.filter(product =>
+            product.name.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+        setFilteredProducts(results);
+    }, [searchTerm]);
 
-    const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setSearchTerm(event.target.value);
-    };
+    const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchTerm(event.target.value);
+    };
 
-    return (
-        <div style={containerStyle}>
-            
-            {showCategories && (
-                <div style={categoriesContainerStyle}>
-                    {categories.map((cat) => (
-                        <CategoryItem key={cat.id} name={cat.name} imgUrl={cat.imgUrl} />
-                    ))}
-                </div>
-            )}
+    return (
+        <div style={containerStyle}>
+            
+            {showCategories && (
+                <div style={categoriesContainerStyle}>
+                    {categories.map((cat) => (
+                        <CategoryItem key={cat.id} name={cat.name} imgUrl={cat.imgUrl} />
+                    ))}
+                </div>
+            )}
 
-            <div style={searchContainerStyle}>
-                <input
-                    type="text"
-                    placeholder="search..."
-                    style={searchInputStyle}
-                    value={searchTerm}
-                    onChange={handleSearchChange}
-                />
-            </div>
+            <div style={searchContainerStyle}>
+                <input
+                    type="text"
+                    placeholder="search..."
+                    style={searchInputStyle}
+                    value={searchTerm}
+                    onChange={handleSearchChange}
+                />
+            </div>
 
-            <h2 style={{ color: 'black', margin: '1rem 0', paddingBottom: '0.5rem', borderBottom: '1px solid #eee' }}>
-                {title} ({filteredProducts.length})
-            </h2>
-            
-            <div style={productsContainerStyle}>
-                {filteredProducts.map(product => (
-                    <ProductCard
-                        key={product.id}
-                        product={product}
-                       
-                    />
-                ))}
-            </div>
-            
-            {filteredProducts.length === 0 && searchTerm && (
-                <div style={{ textAlign: 'center', padding: '50px', color: '#777', fontSize: '1.2rem' }}>&quot;{searchTerm}&quot;
-                </div>
-            )}
-        </div>
-    );
+            <h2 style={{ color: 'black', margin: '1rem 0', paddingBottom: '0.5rem', borderBottom: '1px solid #eee' }}>
+                {title} ({filteredProducts.length})
+            </h2>
+            
+            <div style={productsContainerStyle}>
+                {filteredProducts.map(product => (
+                    <ProductCard
+                        key={product.id}
+                        product={product}
+                        
+                    />
+                ))}
+            </div>
+            
+            {filteredProducts.length === 0 && searchTerm && (
+                <div style={{ textAlign: 'center', padding: '50px', color: '#777', fontSize: '1.2rem' }}>&quot;{searchTerm}&quot;
+                </div>
+            )}
+        </div>
+    );
 };
 
 
 const containerStyle: React.CSSProperties = {
-    padding: '2rem',
-    maxWidth: '1200px',
-    margin: 'auto',
+    padding: '2rem',
+    maxWidth: '1200px',
+    margin: 'auto',
 };
 
 const categoriesContainerStyle: React.CSSProperties = {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(100px, 1fr))',
-    gap: '1rem',
-    marginTop: '2rem',
-    color:'black',
-    overflowX: 'auto',
-    paddingBottom: '10px',
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(100px, 1fr))',
+    gap: '1rem',
+    marginTop: '2rem',
+    color:'black',
+    overflowX: 'auto',
+    paddingBottom: '10px',
 };
 
 const searchContainerStyle: React.CSSProperties = {
-    marginTop: '3rem',
-    marginBottom: '3rem',
-    display: 'flex',
-    justifyContent: 'center',
+    marginTop: '3rem',
+    marginBottom: '3rem',
+    display: 'flex',
+    justifyContent: 'center',
 };
 
 const searchInputStyle: React.CSSProperties = {
-    width: '100%',
-    maxWidth: '600px',
-    padding: '0.75rem 1rem',
-    borderRadius: '25px',
-    border: '1px solid #ccc',
-    fontSize: '1rem',
-    textAlign: 'center',
-    outline: 'none',
-    color:'black',
-    boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+    width: '100%',
+    maxWidth: '600px',
+    padding: '0.75rem 1rem',
+    borderRadius: '25px',
+    border: '1px solid #ccc',
+    fontSize: '1rem',
+    textAlign: 'center',
+    outline: 'none',
+    color:'black',
+    boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
 };
 
 const productsContainerStyle: React.CSSProperties = {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
-    gap: '2rem',
-    color:'black',
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
+    gap: '2rem',
+    color:'black',
 };
 
 export default ProductSection;
