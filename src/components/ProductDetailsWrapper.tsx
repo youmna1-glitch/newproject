@@ -20,7 +20,7 @@ interface ProductDetailsWrapperProps {
 const ProductDetailsWrapper: React.FC<ProductDetailsWrapperProps> = ({ product, productIdString }) => {
 
 
- const { cartCount, addToCart } = useCartState();
+ const { cartCount, addToCart } = useCartState();
     const { wishlist, addToWishlist, removeFromWishlist } = useWishlistState();
 
     const isCurrentlyInWishlist = wishlist.some(item => item.id === product?.id);
@@ -33,7 +33,8 @@ const ProductDetailsWrapper: React.FC<ProductDetailsWrapperProps> = ({ product, 
                 <MainNavbar cartCount={cartCount} wishlistCount={wishlist.length} />
                 <div style={notFoundStyle}>
                     <h1 className="text-4xl font-bold mb-4" style={{color: '#dc3545'}}>خطأ 404</h1>
-                    <p className="text-xl">"{productIdString}" </p>
+                    {/* ⬅️ تم إصلاح الخطأ هنا */}
+                    <p className="text-xl">&quot;{productIdString}&quot; </p>
                 </div>
             </>
         );
