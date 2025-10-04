@@ -6,14 +6,14 @@ import ProductDetails from '@/components/ProductDetails';
 import { useCartState, Product } from '@/hooks/useCartState';
 import { useWishlistState } from '@/hooks/useWishlistState';
 
-
+// يجب أن تتطابق هذه الواجهة مع Product، لكنها قد تكون ممتدة بخصائص إضافية
 interface ExtendedProduct extends Product {
     material: string;
     color: string;
     department: string;
 }
 
-
+// تم إضافة خاصية quantity: 1 إلى كل المنتجات لإزالة خطأ النوع
 const products: ExtendedProduct[] = [
     { id: 1, name: 'Wireless Headphones', price: 250, rating: 4.8, imgUrl: '/images/productCard/item1.jpeg', quantity: 1, material: 'Plastic', color: 'Black', department: 'Electronics' },
     { id: 2, name: 'Smart Watch', price: 300, rating: 4.5, imgUrl: '/images/productCard/item2.jpeg', quantity: 1, material: 'Metal', color: 'Silver', department: 'Electronics' },
@@ -69,7 +69,8 @@ const ProductPage: React.FC<ProductPageProps> = ({ params }) => {
                     product={product}
                     onAddToCart={() => addToCart(product)}
                     onAddToWishlist={() => addToWishlist(product)}
-                    removeFromWishlistt={() => removeFromWishlist(product.id)}
+                   
+                    onRemoveFromWishlist={() => removeFromWishlist(product.id)}
                     isInWishlist={isInWishlist(product.id)}
                 />
             </main>

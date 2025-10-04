@@ -41,8 +41,7 @@ const CartRoutePage: React.FC = () => {
             
             <header>
                 
-                {/* تم تصحيح اسم الخاصية من totalItemCount إلى cartCount */}
-                {/* وتم إضافة wishlistCount التي يتوقعها MainNavbar */}
+              
                 <MainNavbar cartCount={cartCount} wishlistCount={wishlistCount} /> 
             </header>
 
